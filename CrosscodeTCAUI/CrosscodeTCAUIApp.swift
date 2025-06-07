@@ -1,17 +1,16 @@
-//
-//  CrosscodeTCAUIApp.swift
-//  CrosscodeTCAUI
-//
-//  Created by Ian Plumb on 06/06/2025.
-//
-
 import SwiftUI
+import ComposableArchitecture
 
 @main
 struct CrosscodeTCAUIApp: App {
+    let store = Store(initialState: LevelLayoutsListFeature.State()) {
+        LevelLayoutsListFeature()
+    }
+    
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView(store: store)
         }
     }
 }
