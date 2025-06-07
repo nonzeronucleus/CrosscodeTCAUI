@@ -2,10 +2,10 @@ import SwiftUI
 import ComposableArchitecture
 
 struct ContentView: View {
-    let store: StoreOf<LevelLayoutsListFeature>
+    let store: StoreOf<LayoutsListFeature>
     
     var body: some View {
-        LevelLayoutsListView(store: store)
+        LayoutsListView(store: store)
     }
 }
 

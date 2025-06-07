@@ -2,12 +2,12 @@ import ComposableArchitecture
 import CrosscodeDataLibrary
 
 @Reducer
-struct LevelLayoutsListFeature {
+struct LayoutsListFeature {
     @Dependency(\.uuid) var uuid  
 
     @ObservableState
     struct State: Equatable {
-        var levelLayouts: [LevelLayout] = []
+        var layouts: [Layout] = []
     }
     
     enum Action {
@@ -21,7 +21,7 @@ struct LevelLayoutsListFeature {
         case fetchAll(FetchAll)
         enum FetchAll {
             case start
-            case success([LevelLayout])
+            case success([Layout])
             case failure(Error)
         }
     }
@@ -42,7 +42,7 @@ struct LevelLayoutsListFeature {
 
 
 
-extension LevelLayoutsListFeature {
+extension LayoutsListFeature {
     func handleAddLayout(_ state: inout State, action:Action.AddLayout) -> Effect<Action> {
         switch action {
             case .start:
@@ -80,14 +80,14 @@ extension LevelLayoutsListFeature {
 
 
 
-extension LevelLayoutsListFeature {
+extension LayoutsListFeature {
     func handleFetchAll(_ state: inout State, action:Action.FetchAll) -> Effect<Action> {
         switch action {
             case .start:
                 return fetchAll(&state)
                 
             case .success(let layouts):
-                state.levelLayouts = layouts
+                state.layouts = layouts
                 return .none
                 
             case .failure(let error):
@@ -100,7 +100,7 @@ extension LevelLayoutsListFeature {
         @Dependency(\.apiClient) var apiClient
         return .run { send in
             do {
-                let result = try await apiClient.layoutsAPI.fetchAllLevels() as! [LevelLayout]
+                let result = try await apiClient.layoutsAPI.fetchAllLevels() as! [Layout]
                 
                 await send(.fetchAll(.success(result)))
 //                debugPrint(result)

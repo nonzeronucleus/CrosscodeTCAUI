@@ -2,12 +2,12 @@ import SwiftUI
 import ComposableArchitecture
 import CrosscodeDataLibrary
 
-struct LevelLayoutsListView: View {
-    let store: StoreOf<LevelLayoutsListFeature>
+struct LayoutsListView: View {
+    let store: StoreOf<LayoutsListFeature>
     
     var body: some View {
         VStack {
-            ForEach(store.levelLayouts, id: \.self) { level in
+            ForEach(store.layouts, id: \.self) { level in
                 Text("\(level.id)")
                     .onTapGesture {
                         //                        store.send(.didSelectLevel(level))
@@ -18,8 +18,8 @@ struct LevelLayoutsListView: View {
             
         }
         .onAppear {
-//            store.send(LevelLayoutsListFeature.Action.addLayout(.start))
-            store.send(LevelLayoutsListFeature.Action.fetchAll(.start))
+//            store.send(LayoutsListFeature.Action.addLayout(.start))
+            store.send(LayoutsListFeature.Action.fetchAll(.start))
         }
     }
 }
@@ -32,11 +32,11 @@ struct LevelLayoutsListView: View {
     }
 
     let store = Store(initialState: .init()) {
-        LevelLayoutsListFeature()
+        LayoutsListFeature()
     } withDependencies: {
         $0.uuid = .incrementing
         $0.apiClient = mock
     }
     
-    LevelLayoutsListView(store: store)
+    LayoutsListView(store: store)
 }

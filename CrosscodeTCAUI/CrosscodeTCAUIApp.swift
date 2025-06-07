@@ -3,8 +3,8 @@ import ComposableArchitecture
 
 @main
 struct CrosscodeTCAUIApp: App {
-    let store = Store(initialState: LevelLayoutsListFeature.State()) {
-        LevelLayoutsListFeature()
+    let store = Store(initialState: LayoutsListFeature.State()) {
+        LayoutsListFeature()
     }
     
     

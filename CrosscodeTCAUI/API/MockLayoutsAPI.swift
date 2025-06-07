@@ -8,7 +8,7 @@ struct MockLayoutsAPI: LayoutsAPI {
     
     init() {
        levels = [
-                LevelLayout(
+                Layout(
                     id: uuid(),
                     number: 1,
                     gridText: "--|--"
